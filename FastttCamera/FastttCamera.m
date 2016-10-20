@@ -307,8 +307,11 @@
     if (_cameraDevice != cameraDevice) {
         _cameraDevice = cameraDevice;
         
-        AVCaptureDeviceInput *oldInput = [_session.inputs lastObject];
+        AVCaptureDeviceInput *oldInput = [_session.inputs firstObject];
         AVCaptureDeviceInput *newInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        
+        
+        
         
         [_session beginConfiguration];
         [_session removeInput:oldInput];
