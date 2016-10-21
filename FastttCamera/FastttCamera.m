@@ -310,11 +310,29 @@
         AVCaptureDeviceInput *oldInput = [_session.inputs firstObject];
         AVCaptureDeviceInput *newInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         
+        NSArray *oldInputs = [_session.inputs]
         
+        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        _microphoneInput = [[AVCaptureDeviceInput alloc] initWithDevice:audioDevice error:nil];
         
         
         [_session beginConfiguration];
-        [_session removeInput:oldInput];
+        for (AVCaptureDeviceInput* input in oldInputs)
+        {
+            
+            
+            for (AVCaptureInputPort *port in [input ports]) {
+                if ([[port mediaType] isEqualToString:AVMediaTypeAudio]) {
+                   
+                    break;
+                }else{
+                  
+                    [_session removeInput:input];
+                    break;
+                }
+            }
+        }
+
         [_session addInput:newInput];
         [_session commitConfiguration];
     }
