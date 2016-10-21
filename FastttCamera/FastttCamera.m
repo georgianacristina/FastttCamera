@@ -307,13 +307,9 @@
     if (_cameraDevice != cameraDevice) {
         _cameraDevice = cameraDevice;
         
-        AVCaptureDeviceInput *oldInput = [_session.inputs firstObject];
         AVCaptureDeviceInput *newInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         
-        NSArray *oldInputs = [_session.inputs]
-        
-        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        _microphoneInput = [[AVCaptureDeviceInput alloc] initWithDevice:audioDevice error:nil];
+        NSArray *oldInputs = [_session.inputs];
         
         
         [_session beginConfiguration];
