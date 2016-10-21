@@ -309,20 +309,18 @@
         
         AVCaptureDeviceInput *newInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         
-        NSArray *oldInputs = [_session.inputs];
+        NSArray *oldInputs = [NSArray arrayWithArray: _session.inputs];
         
         
         [_session beginConfiguration];
         for (AVCaptureDeviceInput* input in oldInputs)
         {
-            
-            
             for (AVCaptureInputPort *port in [input ports]) {
                 if ([[port mediaType] isEqualToString:AVMediaTypeAudio]) {
-                   
+                    
                     break;
                 }else{
-                  
+                    
                     [_session removeInput:input];
                     break;
                 }
